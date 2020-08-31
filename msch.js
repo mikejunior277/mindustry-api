@@ -162,3 +162,5 @@ class Schematic {
     return this;
   }
 }
+
+module.exports = Schematic;

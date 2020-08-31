@@ -1,0 +1,27 @@
+{
+  "name": "@sample-text-here/mindustry-api",
+  "version": "0.0.1",
+  "description": "An api for mindustry",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sample-text-here/mindustry-api.git"
+  },
+  "keywords": [
+    "mindustry"
+  ],
+  "author": "sample-text-here",
+  "license": "ISC",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "bugs": {
+    "url": "https://github.com/sample-text-here/mindustry-api/issues"
+  },
+  "homepage": "https://github.com/sample-text-here/mindustry-api#readme"
+}
