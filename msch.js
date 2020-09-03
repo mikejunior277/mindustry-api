@@ -11,7 +11,7 @@ class Schematic {
   }
 
   /**
-   * Loads a schematic from file path
+   * Loads a schematic from file path (synchronous)
    * @param {String} fname The file path to load.
    */
   loadFile(fname) {
@@ -21,9 +21,9 @@ class Schematic {
 
     // Is it valid?
     if (!fname) throw up("Needs file to read"); // Of course it needs a file name
-    if (!fs.existsSync(file)) throw up("File does not exist"); // Does the file exist?
-    if (path.extname(file) !== ".msch") throw up("File has wrong extension"); // Is the file .msch?
-    buffer = fs.readFileSync(file); // Read the file into buffer
+    if (!fs.existsSync(fname)) throw up("File does not exist"); // Does the file exist?
+    if (path.extname(fname) !== ".msch") throw up("File has wrong extension"); // Is the file .msch?
+    let buffer = fs.readFileSync(fname); // Read the file into buffer
     this.load(buffer);
   }
 
@@ -46,7 +46,7 @@ class Schematic {
     buffer = zlib.inflateSync(buffer);
     readI = 0;
 
-    fs.writeFileSync("asd.txt", buffer);
+    // require("fs").writeFileSync("asd.msch", buffer)
 
     // height and width
     this.width = readNext(2, "int");
@@ -80,7 +80,10 @@ class Schematic {
       let next = {};
       next.block = this.blocks[readNext(1, "int")]; //the block
       next.position = readNext(4, "int"); //where the block is
-      next.value = readNext(1, "int"); //what the value is
+      // next.value = readNext(1, "int"); //what the value is
+      let tmp = readNext(1, "int")
+      // console.log(tmp)
+      next.value = readNext(tmp, "int"); //what the value is
       next.rotation = readNext(1, "int"); //what the block's rotation is
 
       //get the actual x and y coordinates of the block
