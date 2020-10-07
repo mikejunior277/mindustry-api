@@ -1,3 +1,5 @@
+const content = require("./content");
+
 /**
  * A Mindustry Schematic
  */
@@ -8,6 +10,33 @@ class Schematic {
    */
   constructor(buffer) {
     if (buffer) this.load(buffer);
+
+    // position tools
+    this.position = {
+      /**
+       * Converts a single number to get the actual x and y coordinates of the block
+       *
+       * @param {Number} value
+       */
+      unpack: function (value) {
+        const overflow = 65535;
+
+        return {
+          x: (value % overflow) - Math.floor(value / overflow),
+          y: Math.floor(value / overflow),
+        };
+      },
+
+      /**
+       * The reverse of unpack (Converts x and y to a single number)
+       * @param {Number} x
+       * @param {Number} y
+       */
+      pack: function (x, y) {
+        const overflow = 65535;
+        return y * overflow + x;
+      },
+    };
   }
 
   /**
@@ -41,12 +70,12 @@ class Schematic {
       throw up("Not a msch file"); //Is the header `msch`
     }
 
+    var ver = readNext(1, "int");
+
     // Inflate file
     buffer = buffer.slice(5, buffer.length);
     buffer = zlib.inflateSync(buffer);
     readI = 0;
-
-    // require("fs").writeFileSync("asd.msch", buffer)
 
     // height and width
     this.width = readNext(2, "int");
@@ -73,26 +102,50 @@ class Schematic {
     this.total = readNext(4, "int");
 
     // read schematic
-    const overflow = 65535;
-
     this.schematic = [];
+
     for (let i = 0; i < this.total; i++) {
       let next = {};
       next.block = this.blocks[readNext(1, "int")]; //the block
-      next.position = readNext(4, "int"); //where the block is
+      next.position = this.position.unpack(readNext(4, "int")); //where the block is
       // next.value = readNext(1, "int"); //what the value is
-      let tmp = readNext(1, "int")
-      // console.log(tmp)
-      next.value = readNext(tmp, "int"); //what the value is
+      /*
+        how do i do this
+        Object config = ver == 0 ? mapConfig(block, stream.readInt(), position) : TypeIO.readObject(Reads.get(stream));
+        */
+      next.config =
+        ver == 0
+          ? mapConfig(next.block, readNext(4, "int"), next.position)
+          : "something from typeio";
+
       next.rotation = readNext(1, "int"); //what the block's rotation is
 
-      //get the actual x and y coordinates of the block
-      next.position = {
-        x: (next.position % overflow) - Math.floor(next.position / overflow),
-        y: Math.floor(next.position / overflow),
-      };
-
       this.schematic.push(next);
+    }
+
+    function mapConfig(block, value, position) {
+      switch (block) {
+        case "Sorter":
+        case "Unloader":
+        case "Itemsource":
+          return content.items[value];
+        case "LiquidSource":
+          return content.liquids[value];
+        case "MassDriver":
+        case "ItemBridge":
+          let pos2 = this.position.unpack(value);
+          return { x: pos2.x - position.x, y: pos2.y - position.y };
+        //I hope this is right
+        //original code:
+        // return Point2.unpack(value).sub(
+        //   Point2.x(position),
+        //   Point2.y(position)
+        // );
+        case "LightBlock":
+          return value;
+        default:
+          return null;
+      }
     }
 
     // Helps read bytes
