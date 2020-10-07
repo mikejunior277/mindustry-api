@@ -116,7 +116,7 @@ class Schematic {
       next.config =
         ver == 0
           ? mapConfig(next.block, readNext(4, "int"), next.position)
-          : "something from typeio";
+          : "something from typeio: ";
 
       next.rotation = readNext(1, "int"); //what the block's rotation is
 
@@ -148,6 +148,31 @@ class Schematic {
       }
     }
 
+    /* 
+    //TODO: Port
+    public static Object readObject(Reads read){
+        byte type = read.b();
+        switch(type){
+            case 0: return null;
+            case 1: return read.i();
+            case 2: return read.l();
+            case 3: return read.f();
+            case 4: return readString(read);
+            case 5: return content.getByID(ContentType.all[read.b()], read.s());
+            case 6: short length = read.s(); IntSeq arr = new IntSeq(); for(int i = 0; i < length; i ++) arr.add(read.i()); return arr;
+            case 7: return new Point2(read.i(), read.i());
+            case 8: byte len = read.b(); Point2[] out = new Point2[len]; for(int i = 0; i < len; i ++) out[i] = Point2.unpack(read.i()); return out;
+            case 9: return TechTree.getNotNull(content.getByID(ContentType.all[read.b()], read.s()));
+            case 10: return read.bool();
+            case 11: return read.d();
+            case 12: return world.build(read.i());
+            case 13: return LAccess.all[read.s()];
+            case 14: int blen = read.i(); byte[] bytes = new byte[blen]; read.b(bytes); return bytes;
+            case 15: return UnitCommand.all[read.b()];
+            default: throw new IllegalArgumentException("Unknown object type: " + type);
+        }
+    }
+    */
     // Helps read bytes
     function readNext(bytes, as) {
       let from = readI;

@@ -1,1 +1,110 @@
-{"position":{},"width":4,"height":8,"tags":{"name":"Silicon/Blast/Phase/Kiln"},"blocks":["phase-weaver","inverted-sorter","item-source","bridge-conveyor","junction"],"total":16,"schematic":[{"block":"phase-weaver","position":{"x":2,"y":0},"config":"something from typeio","rotation":0},{"block":"inverted-sorter","position":{"x":0,"y":256},"config":"something from typeio","rotation":4},{"position":{"x":1025,"y":0},"config":"something from typeio","rotation":1},{"block":"phase-weaver","position":{"x":1285,"y":0},"config":"something from typeio","rotation":0},{"block":"phase-weaver","position":{"x":0,"y":1792},"config":"something from typeio","rotation":0},{"block":"phase-weaver","position":{"x":258,"y":1536},"config":"something from typeio","rotation":0},{"block":"inverted-sorter","position":{"x":1280,"y":0},"config":"something from typeio","rotation":0},{"block":"junction","position":{"x":1,"y":259},"config":"something from typeio","rotation":0},{"block":"inverted-sorter","position":{"x":0,"y":1792},"config":"something from typeio","rotation":0},{"block":"phase-weaver","position":{"x":769,"y":0},"config":"something from typeio","rotation":3},{"block":"phase-weaver","position":{"x":1031,"y":256},"config":"something from typeio","rotation":255},{"position":{"x":-1,"y":65468},"config":"something from typeio","rotation":255},{"position":{"x":1,"y":516},"config":"something from typeio","rotation":0},{"position":{"x":512,"y":1},"config":"something from typeio","rotation":2},{"block":"phase-weaver","position":{"x":0,"y":5},"config":"something from typeio","rotation":7},{"block":"phase-weaver","position":{"x":512,"y":768},"config":"something from typeio","rotation":1}]}
+{
+  "position": {},
+  "width": 4,
+  "height": 8,
+  "tags": { "name": "Silicon/Blast/Phase/Kiln" },
+  "blocks": [
+    "phase-weaver",
+    "inverted-sorter",
+    "item-source",
+    "bridge-conveyor",
+    "junction"
+  ],
+  "total": 16,
+  "schematic": [
+    {
+      "block": "phase-weaver",
+      "position": { "x": 2, "y": 0 },
+      "config": "something from typeio: 65792",
+      "rotation": 0
+    },
+    {
+      "block": "phase-weaver",
+      "position": { "x": 0, "y": 1029 },
+      "config": "something from typeio: 67174656",
+      "rotation": 0
+    },
+    {
+      "block": "phase-weaver",
+      "position": { "x": 0, "y": 1285 },
+      "config": "something from typeio: 117440512",
+      "rotation": 0
+    },
+    {
+      "block": "phase-weaver",
+      "position": { "x": 258, "y": 1536 },
+      "config": "something from typeio: 65536",
+      "rotation": 5
+    },
+    {
+      "block": "phase-weaver",
+      "position": { "x": 259, "y": 4 },
+      "config": "something from typeio: 65537",
+      "rotation": 7
+    },
+    {
+      "block": "phase-weaver",
+      "position": { "x": 0, "y": 0 },
+      "config": "something from typeio: 769",
+      "rotation": 3
+    },
+    {
+      "block": "phase-weaver",
+      "position": { "x": 1031, "y": 256 },
+      "config": "something from typeio: 4294967227",
+      "rotation": 255
+    },
+    {
+      "position": { "x": -65020, "y": 65431 },
+      "config": "something from typeio: 65541",
+      "rotation": 0
+    },
+    {
+      "block": "inverted-sorter",
+      "position": { "x": 512, "y": 512 },
+      "config": "something from typeio: 327680",
+      "rotation": 7
+    },
+    {
+      "block": "phase-weaver",
+      "position": { "x": 512, "y": 768 },
+      "config": "something from typeio: 17235968",
+      "rotation": 0
+    },
+    {
+      "block": "phase-weaver",
+      "position": { "x": 4, "y": 0 },
+      "config": "something from typeio: 16777218",
+      "rotation": 0
+    },
+    {
+      "block": "item-source",
+      "position": { "x": 1024, "y": 2 },
+      "config": "something from typeio: 33555456",
+      "rotation": 1
+    },
+    {
+      "block": "bridge-conveyor",
+      "position": { "x": 5, "y": 2 },
+      "config": "something from typeio: 134217727",
+      "rotation": 186
+    },
+    {
+      "position": { "x": -27392, "y": 65536 },
+      "config": "something from typeio: 512",
+      "rotation": 6
+    },
+    {
+      "block": "phase-weaver",
+      "position": { "x": 3, "y": 257 },
+      "config": "something from typeio: 263424",
+      "rotation": 0
+    },
+    {
+      "block": "junction",
+      "position": { "x": 3, "y": 257 },
+      "config": "something from typeio: 328960",
+      "rotation": 0
+    }
+  ]
+}
