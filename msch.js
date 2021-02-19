@@ -12,33 +12,30 @@ class Schematic {
     if (buffer) this.load(buffer);
 
     // position tools
-    this.position = {
-      /**
+  }
+  /**
        * Converts a single number to get the actual x and y coordinates of the block
        *
        * @param {Number} value
        */
-      unpack: function (value) {
+      unpack(value){
         const overflow = 65535;
 
         return {
           x: (value % overflow) - Math.floor(value / overflow),
           y: Math.floor(value / overflow),
         };
-      },
+      }
 
       /**
        * The reverse of unpack (Converts x and y to a single number)
        * @param {Number} x
        * @param {Number} y
        */
-      pack: function (x, y) {
+      pack(x, y) {
         const overflow = 65535;
         return y * overflow + x;
-      },
-    };
-  }
-
+      }
   /**
    * Loads a schematic from file path (synchronous)
    * @param {String} fname The file path to load.
@@ -107,17 +104,15 @@ class Schematic {
     for (let i = 0; i < this.total; i++) {
       let next = {};
       next.block = this.blocks[readNext(1, "int")]; //the block
-      next.position = this.position.unpack(readNext(4, "int")); //where the block is
+      next.position = this.unpack(readNext(4, "int")); //where the block is
       // next.value = readNext(1, "int"); //what the value is
       /*
         how do i do this
         Object config = ver == 0 ? mapConfig(block, stream.readInt(), position) : TypeIO.readObject(Reads.get(stream));
         */
-      next.config =
-        ver == 0
-          ? mapConfig(next.block, readNext(4, "int"), next.position)
-          : "something from typeio: ";
-
+       next.config =
+          ver == 0
+              ? mapConfig(next.block, readNext(4, "int"), next.position): "something from typeio: ";
       next.rotation = readNext(1, "int"); //what the block's rotation is
 
       this.schematic.push(next);
@@ -125,15 +120,15 @@ class Schematic {
 
     function mapConfig(block, value, position) {
       switch (block) {
-        case "Sorter":
-        case "Unloader":
-        case "Itemsource":
+        case "itemsource":
+        case "unloader":
+        case "sorter":
           return content.items[value];
-        case "LiquidSource":
+        case "liquidSource":
           return content.liquids[value];
-        case "MassDriver":
-        case "ItemBridge":
-          let pos2 = this.position.unpack(value);
+        case "massDriver":
+        case "itemBridge":
+          let pos2 = this.unpack(value);
           return { x: pos2.x - position.x, y: pos2.y - position.y };
         //I hope this is right
         //original code:
@@ -141,7 +136,7 @@ class Schematic {
         //   Point2.x(position),
         //   Point2.y(position)
         // );
-        case "LightBlock":
+        case "lightBlock":
           return value;
         default:
           return null;
@@ -164,7 +159,7 @@ class Schematic {
         // case 5: return content.getByID(ContentType.all[read.b()], read.s());
         // case 6: short length = read.s(); IntSeq arr = new IntSeq(); for(int i = 0; i < length; i ++) arr.add(read.i()); return arr;
         case 7:
-          return this.position.pack(readNext(4, "int"), readNext(4, "int"));
+          return this.pack(readNext(4, "int"), readNext(4, "int"));
         // case 8: byte len = read.b(); Point2[] out = new Point2[len]; for(int i = 0; i < len; i ++) out[i] = Point2.unpack(read.i()); return out;
         // case 9: return TechTree.getNotNull(content.getByID(ContentType.all[read.b()], read.s()));
         case 10:
