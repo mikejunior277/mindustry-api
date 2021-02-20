@@ -1,5 +1,4 @@
 const content = require("./content");
-
 /**
  * A Mindustry Schematic
  */
@@ -14,28 +13,26 @@ class Schematic {
     // position tools
   }
   /**
-       * Converts a single number to get the actual x and y coordinates of the block
-       *
-       * @param {Number} value
-       */
-      unpack(value){
-        const overflow = 65535;
-
-        return {
-          x: (value % overflow) - Math.floor(value / overflow),
-          y: Math.floor(value / overflow),
-        };
-      }
-
-      /**
-       * The reverse of unpack (Converts x and y to a single number)
-       * @param {Number} x
-       * @param {Number} y
-       */
-      pack(x, y) {
-        const overflow = 65535;
-        return y * overflow + x;
-      }
+  * Converts a single number to get the actual x and y coordinates of the block
+  *
+  * @param {Number} value
+   */
+  unpack(value){
+    const overflow = 65535;
+    return {
+      x: (value % overflow) - Math.floor(value / overflow),
+      y: Math.floor(value / overflow),
+    };
+  }
+  /**
+  * The reverse of unpack (Converts x and y to a single number)
+  * @param {Number} x
+  * @param {Number} y
+  */
+  pack(x, y) {
+    const overflow = 65535;
+    return y * overflow + x;
+  }
   /**
    * Loads a schematic from file path (synchronous)
    * @param {String} fname The file path to load.
@@ -68,7 +65,6 @@ class Schematic {
     }
 
     var ver = readNext(1, "int");
-
     // Inflate file
     buffer = buffer.slice(5, buffer.length);
     buffer = zlib.inflateSync(buffer);
@@ -110,7 +106,7 @@ class Schematic {
         how do i do this
         Object config = ver == 0 ? mapConfig(block, stream.readInt(), position) : TypeIO.readObject(Reads.get(stream));
         */
-       next.config=mapConfig(next.block,readNext(4, "int"),next.position)
+       next.config =mapConfig(next.block,readNext(4, "int"),next.position)
       next.rotation = readNext(1, "int"); //what the block's rotation is
 
       this.schematic.push(next);
@@ -125,7 +121,7 @@ class Schematic {
         case "liquid-source":
           return content.liquids[value];
         case "massDriver":
-        case "itemBridge":
+        case "bridge-conveyor":
           let pos2 = this.unpack(value);
           return { x: pos2.x - position.x, y: pos2.y - position.y };
         //I hope this is right
