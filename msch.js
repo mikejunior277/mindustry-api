@@ -106,7 +106,7 @@ class Schematic {
         how do i do this
         Object config = ver == 0 ? mapConfig(block, stream.readInt(), position) : TypeIO.readObject(Reads.get(stream));
         */
-       next.config =mapConfig(next.block,readNext(4, "int"),next.position)
+       next.config =mapConfig.bind(this)(next.block,readNext(4, "int"),next.position)
       next.rotation = readNext(1, "int"); //what the block's rotation is
 
       this.schematic.push(next);
